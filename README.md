@@ -1,27 +1,15 @@
-Welcome to the Glitch BETA
-=========================
+# Timestamp Microservice
+Returns a JSON object with unix epoch time and raw time. It works if you pass either unix time or a date string.
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+## Usage
+Pass a date string or unix time as a parameter in the url. Passing an invalid string or unix time will return a JSON object with null values.
 
-**Glitch** is the friendly commmunity where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+### Example
 
-Find out more [about Glitch](https://glitch.com/about).
+https://timestamp-ms.herokuapp.com/December%2015,%202015
+https://timestamp-ms.herokuapp.com/1450137600
 
+Output:
 
-Your Project
-------------
+`{ "unix": 1450137600, "natural": "December 15, 2015" }`
 
-On the front-end,
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
-
-On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
-
-
-Made by [Fog Creek](https://fogcreek.com/)
--------------------
-
-\ ゜o゜)ノ
