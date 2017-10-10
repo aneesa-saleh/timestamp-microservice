@@ -2,12 +2,13 @@
 Returns a JSON object with unix epoch time and raw time. It works if you pass either unix time or a date string.
 
 ## Usage
-Pass a date string or unix time as a parameter in the url. Passing an invalid string or unix time will return a JSON object with null values.
+* Pass a date string or unix time as a parameter in the url to get a timestamp JSON object.
+* Passing an invalid string or unix time will return a JSON object with null values.
 
 ### Example
 
-https://timestamp-ms.herokuapp.com/December%2015,%202015
-https://timestamp-ms.herokuapp.com/1450137600
+* https://as-timestamp-microservice.glitch.me//December%2015,%202015
+* https://as-timestamp-microservice.glitch.me//1450137600
 
 Output:
 
