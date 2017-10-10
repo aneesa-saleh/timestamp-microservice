@@ -12,5 +12,8 @@ Returns a JSON object with unix epoch time and raw time. It works if you pass ei
 
 Output:
 
-`{ "unix": 1450137600, "natural": "December 15, 2015" }`
+`{ 
+  "unix": 1450137600, 
+  "natural": "December 15, 2015" 
+}`
 

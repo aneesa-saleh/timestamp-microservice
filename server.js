@@ -1,39 +1,57 @@
-// server.js
-// where your node app starts
 
 // init project
 var express = require('express');
 var app = express();
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
+//serve files in 'public' folder as static
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
+//information page
 app.get("/", function (request, response) {
   response.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/dreams", function (request, response) {
-  response.send(dreams);
+//get everything after '/' and store in date
+app.get("/:date", function (request, response) {
+  var dateString = request.params.date, date, dateObj;
+  if(isNaN(Number(dateString))){ //not number, not a unix epoch
+    if(isNaN(Date.parse(dateString))) { //if it's not a valid date string
+      dateObj = {
+          "unix": null,
+          "natural": null
+      };
+    }
+    else{ //valid date string
+      date = new Date(dateString);
+      dateObj = {
+          "unix": date.getTime()/1000, //convert ms to seconds
+          "natural": formatDate(date)
+      };
+    }
+  }
+  else{ //unix epoch
+    date = new Date(Number(dateString)*1000); //convert ms to seconds
+    dateObj = {
+          "unix": Number(dateString),
+          "natural": formatDate(date)
+    };
+  }
+  response.json(dateObj);
 });
 
-// could also use the POST body instead of query string: http://expressjs.com/en/api.html#req.body
-app.post("/dreams", function (request, response) {
-  dreams.push(request.query.dream);
-  response.sendStatus(200);
-});
-
-// Simple in-memory store for now
-var dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
-
-// listen for requests :)
+// listen for requests
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+//convert date to readable string
+function formatDate(date) {
+  var months = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+  
+  return months[date.getMonth()] + " " + date.getUTCDate() + ", " + date.getFullYear();
+}
